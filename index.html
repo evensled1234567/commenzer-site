@@ -1,678 +1,488 @@
-<!-- index.html -->
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Funteron | B2B Odds Comparison Platform</title>
-  <meta name="description" content="Funteron is a B2B odds comparison and conversion platform for media and sportsbook partners. Fast integration tiers, brand-safe execution, and measurable performance." />
-
-  <!-- Open Graph / LinkedIn -->
-  <meta property="og:title" content="Funteron | B2B Odds Comparison Platform" />
-  <meta property="og:description" content="A B2B odds comparison and conversion platform for media and sportsbook partners. Integration tiers, brand safety, and measurable performance." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.funteron.com/" />
-  <!-- <meta property="og:image" content="https://www.funteron.com/assets/img/og.png" /> -->
-
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Commenzer | Conversation intelligence for senior experts</title>
+  <meta
+    name="description"
+    content="Commenzer shows senior experts the conversations that matter to their market, benchmarks their visibility, and helps them decide where their words can create leverage."
+  />
 
   <style>
-    :root{
-      --ink:#0D1B2A;
-      --bg:#FFFFFF;
-      --card:#FFFFFF;
-      --teal:#00A8A8;
-      --orange:#FF6F3C;
-      --muted:rgba(13,27,42,0.10);
-      --navH:110px;
+    :root {
+      --navy: #050b24;
+      --navy-2: #0a1233;
+      --teal: #007f7a;
+      --teal-2: #00a39b;
+      --blue: #1557ff;
+      --text: #101828;
+      --muted: #667085;
+      --line: #e4e7ec;
+      --bg: #f7f9fc;
+      --white: #ffffff;
     }
 
-    body{
-      font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
-      background:var(--bg);
-      color:var(--ink);
-      padding-top:var(--navH);
-      margin:0;
+    * {
+      box-sizing: border-box;
     }
 
-    .navbar{ background:var(--ink); min-height:var(--navH); }
-    .navbar-brand img{ height:80px; }
-    .navbar-brand{ padding-top:0; padding-bottom:0; }
-    .navbar-nav .nav-link{ color:#fff; font-size:0.95rem; padding-top:0; padding-bottom:0; opacity:0.95; }
-    .navbar-nav .nav-link:hover{ opacity:1; text-decoration:underline; text-underline-offset:6px; }
-    .navbar-nav .nav-link.active{ font-weight:800; text-decoration:underline; text-underline-offset:6px; }
-
-    .wrap{ max-width:1100px; margin:0 auto; padding:0 24px; }
-
-    .hero{
-      padding:44px 0 22px;
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: var(--bg);
     }
 
-    .hero-card{
-      position:relative;
-      overflow:hidden;
-      background:var(--card);
-      border:1px solid var(--muted);
-      border-radius:18px;
-      box-shadow:0 10px 30px rgba(13,27,42,0.10);
-      padding:28px;
-      isolation:isolate;
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* Animated background (hero-only) */
-    .hero-bg{
-      position:absolute;
-      inset:-80px;
-      z-index:0;
-      pointer-events:none;
-      opacity:0.85;
-      filter:saturate(1.05);
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--line);
     }
 
-    .hero-bg::before,
-    .hero-bg::after{
-      content:"";
-      position:absolute;
-      inset:0;
+    .header-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 22px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      height: 42px;
+      max-width: 260px;
+      object-fit: contain;
+      display: block;
+    }
+
+    nav {
+      display: flex;
+      gap: 24px;
+      font-size: 14px;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    main {
+      flex: 1;
+    }
+
+    .hero {
       background:
-        radial-gradient(60% 55% at 15% 30%, rgba(0,168,168,0.35) 0%, rgba(0,168,168,0.00) 60%),
-        radial-gradient(55% 60% at 85% 35%, rgba(255,111,60,0.22) 0%, rgba(255,111,60,0.00) 62%),
-        radial-gradient(45% 45% at 60% 85%, rgba(0,168,168,0.16) 0%, rgba(0,168,168,0.00) 58%),
-        radial-gradient(35% 35% at 30% 90%, rgba(255,111,60,0.12) 0%, rgba(255,111,60,0.00) 55%);
-      transform:translate3d(0,0,0);
-      filter:blur(26px);
+        radial-gradient(circle at top right, rgba(0, 163, 155, 0.18), transparent 36%),
+        linear-gradient(135deg, var(--navy), var(--navy-2));
+      color: var(--white);
     }
 
-    /* "Strands" layer */
-    .hero-bg::after{
-      background:
-        conic-gradient(from 220deg at 25% 40%,
-          rgba(0,168,168,0.0) 0deg,
-          rgba(0,168,168,0.22) 40deg,
-          rgba(0,168,168,0.0) 95deg,
-          rgba(255,111,60,0.18) 140deg,
-          rgba(255,111,60,0.0) 210deg,
-          rgba(0,168,168,0.18) 260deg,
-          rgba(0,168,168,0.0) 360deg
-        );
-      mix-blend-mode:multiply;
-      opacity:0.55;
-      filter:blur(36px);
-      transform:translate3d(0,0,0) scale(1.05);
-      animation:heroFloat 14s ease-in-out infinite;
+    .hero-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 96px 24px 104px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 56px;
+      align-items: center;
     }
 
-    /* gentle motion */
-    @keyframes heroFloat{
-      0%   { transform:translate3d(-10px, 8px, 0) rotate(-2deg) scale(1.06); }
-      50%  { transform:translate3d(12px, -6px, 0) rotate(2deg)  scale(1.08); }
-      100% { transform:translate3d(-10px, 8px, 0) rotate(-2deg) scale(1.06); }
+    .eyebrow {
+      color: var(--teal-2);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 13px;
+      margin-bottom: 18px;
     }
 
-    /* Keep content above background */
-    .hero-content{
-      position:relative;
-      z-index:1;
+    h1 {
+      margin: 0;
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+      max-width: 760px;
     }
 
-    /* Optional subtle top sheen */
-    .hero-sheen{
-      position:absolute;
-      left:-20%;
-      top:-35%;
-      width:140%;
-      height:55%;
-      background:linear-gradient(90deg, rgba(255,255,255,0.0), rgba(255,255,255,0.55), rgba(255,255,255,0.0));
-      transform:rotate(-6deg);
-      z-index:1;
-      opacity:0.30;
-      pointer-events:none;
+    .lead {
+      margin: 28px 0 0;
+      color: #d0d5dd;
+      font-size: 21px;
+      line-height: 1.5;
+      max-width: 660px;
     }
 
-    .pill{
-      display:inline-block;
-      padding:6px 10px;
-      border-radius:999px;
-      background:rgba(0,168,168,0.12);
-      color:var(--ink);
-      font-weight:800;
-      font-size:0.9rem;
+    .hero-actions {
+      margin-top: 36px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
     }
 
-    .hero h1{
-      font-size:2.1rem;
-      line-height:1.15;
-      margin:14px 0 10px;
-      letter-spacing:-0.3px;
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      text-decoration: none;
+      border: 1px solid transparent;
     }
 
-    .hero p.lead{
-      max-width:900px;
-      margin:0 0 16px;
-      font-size:1.08rem;
-      line-height:1.55;
+    .button-primary {
+      background: linear-gradient(135deg, var(--teal), var(--teal-2));
+      color: var(--white);
     }
 
-    .cta-row{ display:flex; gap:12px; flex-wrap:wrap; margin-top:10px; }
-    .btn-primary{
-      background:var(--orange);
-      border:none;
-      color:var(--ink);
-      font-weight:900;
-      border-radius:12px;
-      padding:12px 16px;
-    }
-    .btn-primary:hover{ opacity:0.92; }
-    .btn-ghost{
-      background:transparent;
-      border:1px solid rgba(13,27,42,0.28);
-      color:var(--ink);
-      font-weight:800;
-      border-radius:12px;
-      padding:12px 16px;
-    }
-    .btn-ghost:hover{ border-color:rgba(13,27,42,0.45); }
-
-    .proof-strip{
-      margin-top:16px;
-      padding-top:16px;
-      border-top:1px solid rgba(13,27,42,0.14);
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:space-between;
-    }
-    .proof-item{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      font-size:0.95rem;
-    }
-    .dot{
-      width:10px;
-      height:10px;
-      border-radius:50%;
-      background:var(--teal);
-      box-shadow:0 0 0 4px rgba(0,168,168,0.15);
-      flex:0 0 auto;
-    }
-    .proof-muted{ opacity:0.9; }
-
-    section{ padding:18px 0; }
-    .section-title{
-      display:flex;
-      align-items:baseline;
-      justify-content:space-between;
-      gap:14px;
-      margin:6px 0 12px;
-    }
-    .section-title h2{
-      margin:0;
-      font-size:1.35rem;
-      letter-spacing:-0.2px;
-    }
-    .section-title p{
-      margin:0;
-      opacity:0.85;
-      font-size:0.98rem;
+    .button-secondary {
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.26);
+      background: rgba(255, 255, 255, 0.04);
     }
 
-    .cardish{
-      background:var(--card);
-      border:1px solid var(--muted);
-      border-radius:16px;
-      box-shadow:0 10px 30px rgba(13,27,42,0.08);
-      padding:18px;
-      height:100%;
-    }
-    .kicker{
-      font-weight:900;
-      color:var(--ink);
-      margin-bottom:6px;
-      font-size:0.98rem;
-    }
-    .small{
-      font-size:0.95rem;
-      line-height:1.55;
-      margin:0;
-      opacity:0.95;
+    .hero-note {
+      margin-top: 18px;
+      color: #98a2b3;
+      font-size: 14px;
     }
 
-    .step{
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-    }
-    .step-num{
-      width:34px; height:34px;
-      border-radius:10px;
-      background:rgba(255,111,60,0.14);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:900;
-      color:var(--ink);
-      flex:0 0 auto;
+    .card {
+      background: rgba(255, 255, 255, 0.96);
+      color: var(--text);
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
     }
 
-    .tier-badge{
-      display:inline-block;
-      padding:4px 9px;
-      border-radius:999px;
-      background:rgba(0,168,168,0.10);
-      font-weight:900;
-      font-size:0.85rem;
-      margin-bottom:8px;
+    .card h2 {
+      margin: 0 0 18px;
+      font-size: 22px;
+      letter-spacing: -0.02em;
     }
 
-    .mini-team{
-      display:grid;
-      grid-template-columns:repeat(4, 1fr);
-      gap:12px;
-    }
-    .mini{
-      background:var(--card);
-      border:1px solid var(--muted);
-      border-radius:14px;
-      padding:14px;
-      box-shadow:0 10px 30px rgba(13,27,42,0.06);
-    }
-    .mini .name{ font-weight:900; margin-bottom:2px; }
-    .mini .role{ opacity:0.85; font-size:0.92rem; margin-bottom:8px; }
-    .mini a{ color:var(--teal); text-decoration:none; font-weight:800; font-size:0.92rem; }
-    .mini a:hover{ text-decoration:underline; }
-
-    .cta-band{
-      margin:18px 0 0;
-      background:var(--ink);
-      color:#fff;
-      border-radius:18px;
-      padding:22px;
-      box-shadow:0 12px 30px rgba(13,27,42,0.22);
-      border:1px solid rgba(255,255,255,0.08);
-    }
-    .cta-band h3{ margin:0 0 6px; font-size:1.35rem; }
-    .cta-band p{ margin:0; opacity:0.9; }
-    .cta-band .cta-row{ margin-top:14px; }
-    .cta-band .btn-ghost{
-      border-color:rgba(255,255,255,0.35);
-      color:#fff;
-    }
-    .cta-band .btn-ghost:hover{ border-color:rgba(255,255,255,0.55); }
-
-    footer{
-      text-align:center;
-      padding:20px;
-      background:var(--ink);
-      color:#fff;
-      border-top:1px solid #4B4B4B;
-      margin-top:42px;
-      font-size:0.9rem;
-    }
-    .contact-info{ margin-top:10px; font-size:0.9rem; }
-    .contact-info a{ color:var(--teal); text-decoration:none; }
-    .contact-info a:hover{ text-decoration:underline; }
-
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce){
-      .hero-bg::after{ animation:none !important; }
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px;
+      margin-top: 14px;
+      background: #fbfcff;
     }
 
-    /* Responsive */
-    @media (max-width: 992px){
-      .mini-team{ grid-template-columns:repeat(2, 1fr); }
-      .hero h1{ font-size:1.75rem; }
+    .metric strong {
+      display: block;
+      font-size: 16px;
+      margin-bottom: 6px;
     }
-    @media (max-width: 576px){
-      :root{ --navH:104px; }
-      body{ padding-top:var(--navH); }
-      .hero-card{ padding:20px; }
-      .mini-team{ grid-template-columns:1fr; }
-      .hero-bg{ inset:-100px; }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .section {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 72px 24px;
+    }
+
+    .section h2 {
+      margin: 0;
+      font-size: 36px;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+    }
+
+    .section-intro {
+      margin-top: 16px;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.55;
+    }
+
+    .grid {
+      margin-top: 36px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .info-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .info-card h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    .info-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .trust {
+      background: var(--white);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .trust-list {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 0;
+    }
+
+    .trust-item {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .trust-item strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 6px;
+      font-size: 15px;
+    }
+
+    .contact-box {
+      margin-top: 34px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .contact-box p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    footer {
+      background: var(--navy);
+      color: #98a2b3;
+    }
+
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 30px 24px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 14px;
+    }
+
+    footer a {
+      color: #d0d5dd;
+      text-decoration: none;
+      margin-left: 18px;
+    }
+
+    footer a:hover {
+      color: var(--white);
+    }
+
+    @media (max-width: 860px) {
+      nav {
+        display: none;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        padding-top: 72px;
+        padding-bottom: 72px;
+      }
+
+      .grid,
+      .trust-list {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-box {
+        display: block;
+      }
+
+      .contact-box .button {
+        margin-top: 18px;
+        width: 100%;
+      }
     }
   </style>
 </head>
 
 <body>
-
-  <!-- Cookie Banner -->
-  <div id="cookieBanner" style="display:none; position:fixed; left:18px; right:18px; bottom:18px; z-index:9999; max-width:1100px; margin:0 auto;">
-    <div style="background:#0D1B2A; color:#FFFFFF; border-radius:14px; padding:16px 18px; box-shadow:0 12px 30px rgba(13,27,42,0.35);">
-      <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between;">
-        <div style="flex:1; min-width:260px; font-size:0.95rem; line-height:1.35;">
-          We use analytics cookies to understand site usage and improve the experience.
-          You can accept or reject analytics. Read more in our <a href="cookies.html" style="color:#00A8A8; text-decoration:none;">Cookie Policy</a>.
-        </div>
-        <div style="display:flex; gap:10px; align-items:center;">
-          <button id="cookieReject" style="background:transparent; color:#FFFFFF; border:1px solid rgba(255,255,255,0.45); border-radius:10px; padding:10px 12px; font-weight:700;">
-            Reject
-          </button>
-          <button id="cookieAccept" style="background:#FF6F3C; color:#0D1B2A; border:none; border-radius:10px; padding:10px 12px; font-weight:900;">
-            Accept
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg fixed-top">
-    <div class="container-fluid px-4">
-      <div class="d-flex align-items-center">
-        <a class="navbar-brand me-3" href="index.html">
-          <img src="logo.png" alt="Funteron Logo" />
+  <div class="page">
+    <header>
+      <div class="header-inner">
+        <a href="/" aria-label="Commenzer home">
+          <img class="logo" src="commenzer-1line.png" alt="Commenzer" />
         </a>
-        <ul class="navbar-nav flex-row align-items-center gap-3 mb-0">
-          <li class="nav-item"><a class="nav-link" href="demo.html">Demo</a></li>
-          <li class="nav-item"><a class="nav-link" href="team.html">Team</a></li>
-          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-        </ul>
+
+        <nav aria-label="Main navigation">
+          <a href="#how-it-works">How it works</a>
+          <a href="#trust">Trust</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+        </nav>
       </div>
-    </div>
-  </nav>
+    </header>
 
-  <!-- Hero -->
-  <header class="hero">
-    <div class="wrap">
-      <div class="hero-card">
-        <div class="hero-bg" aria-hidden="true"></div>
-        <div class="hero-sheen" aria-hidden="true"></div>
+    <main>
+      <section class="hero">
+        <div class="hero-inner">
+          <div>
+            <div class="eyebrow">Conversation intelligence for senior experts</div>
+            <h1>Your market is already talking. Make your words count.</h1>
+            <p class="lead">
+              Commenzer shows you the conversations that matter to your market,
+              benchmarks your current visibility, and helps you decide where your
+              words can create leverage.
+            </p>
 
-        <div class="hero-content">
-          <span class="pill">B2B platform</span>
-          <h1>Odds comparison and conversion infrastructure for media and sportsbook partners</h1>
-          <p class="lead">
-            Funteron helps partners present real-time odds in a clean, brand-safe experience, then route users to their chosen operator with measurable performance and multiple integration tiers.
+            <div class="hero-actions">
+              <a class="button button-primary" href="mailto:hello@commenzer.com">Contact Commenzer</a>
+              <a class="button button-secondary" href="#how-it-works">How it works</a>
+            </div>
+
+            <p class="hero-note">
+              LinkedIn-first. Public professional data only. No automated posting.
+            </p>
+          </div>
+
+          <aside class="card" aria-label="Commenzer benchmark preview">
+            <h2>Private benchmark preview</h2>
+
+            <div class="metric">
+              <strong>Visibility benchmark</strong>
+              <span>See how your public professional activity compares with anonymised peers.</span>
+            </div>
+
+            <div class="metric">
+              <strong>Conversation opportunities</strong>
+              <span>Identify where your expertise can add value in active market conversations.</span>
+            </div>
+
+            <div class="metric">
+              <strong>Weekly updates</strong>
+              <span>Track how themes, conversations, and your visibility change over time.</span>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="how-it-works" class="section">
+        <h2>Built for experts whose visibility matters.</h2>
+        <p class="section-intro">
+          Commenzer is being developed for fractional CTOs, advisers, operators,
+          and senior experts who need to know where relevant conversations are
+          happening before the moment passes.
+        </p>
+
+        <div class="grid">
+          <article class="info-card">
+            <h3>Benchmark your visibility</h3>
+            <p>
+              Compare publishing activity, conversation activity, and engagement
+              against an anonymised peer group.
+            </p>
+          </article>
+
+          <article class="info-card">
+            <h3>Find relevant conversations</h3>
+            <p>
+              Surface conversations where your experience can contribute to the
+              market rather than adding noise.
+            </p>
+          </article>
+
+          <article class="info-card">
+            <h3>Decide where to act</h3>
+            <p>
+              Understand why a conversation matters and what angle you could
+              credibly bring to it.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="trust" class="trust">
+        <div class="section">
+          <h2>Built for trust and restraint.</h2>
+          <p class="section-intro">
+            Commenzer is designed as a decision-support service. You stay in
+            control. We do not post, comment, or act on your behalf.
           </p>
 
-          <div class="cta-row">
-            <a class="btn btn-primary" href="demo.html">Watch demo</a>
-            <a class="btn btn-ghost" href="contact.html">Book a demo</a>
-          </div>
-
-          <div class="proof-strip">
-            <div class="proof-item">
-              <span class="dot"></span>
-              <span class="proof-muted"><strong>Leadership</strong>: ex-OpenBet, Scientific Games, Betsson, Ladbrokes Coral</span>
+          <div class="trust-list">
+            <div class="trust-item">
+              <strong>Public professional data only</strong>
+              No private LinkedIn data or hidden profile data.
             </div>
-            <div class="proof-item">
-              <span class="dot"></span>
-              <span class="proof-muted"><strong>Partner-safe</strong>: responsible gambling posture and operator-friendly integrations</span>
+
+            <div class="trust-item">
+              <strong>Anonymous peer comparison</strong>
+              Peer identities are not shown in benchmark views.
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
 
-  <!-- What we do -->
-  <section>
-    <div class="wrap">
-      <div class="section-title">
-        <h2>What we do</h2>
-        <p>Simple value, built for B2B requirements.</p>
-      </div>
-      <div class="row g-3">
-        <div class="col-md-4">
-          <div class="cardish">
-            <div class="kicker">Real-time odds comparison</div>
-            <p class="small">Aggregate and present odds cleanly, with a UX designed for speed, clarity, and conversion intent.</p>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="cardish">
-            <div class="kicker">Conversion routing</div>
-            <p class="small">Route users to the right operator journey (deep link, webview, or API) with consistent tracking and reporting.</p>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="cardish">
-            <div class="kicker">Partner-grade delivery</div>
-            <p class="small">Designed for media brands and operators with governance, compliance awareness, and integration pragmatism.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+            <div class="trust-item">
+              <strong>No automated posting</strong>
+              Commenzer helps you decide where to engage. You decide what to say.
+            </div>
 
-  <!-- How it works -->
-  <section>
-    <div class="wrap">
-      <div class="section-title">
-        <h2>How it works</h2>
-        <p>Three steps from intent to bet.</p>
-      </div>
-      <div class="row g-3">
-        <div class="col-md-4">
-          <div class="cardish">
-            <div class="step">
-              <div class="step-num">1</div>
-              <div>
-                <div class="kicker">Capture intent</div>
-                <p class="small">Users arrive from a trusted environment and choose a market/event.</p>
-              </div>
+            <div class="trust-item">
+              <strong>Opt out anytime</strong>
+              You can ask not to be contacted or benchmarked again.
             </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="cardish">
-            <div class="step">
-              <div class="step-num">2</div>
-              <div>
-                <div class="kicker">Compare odds</div>
-                <p class="small">We show real-time prices across operators in a consistent, brand-safe view.</p>
-              </div>
+
+          <div class="contact-box">
+            <div>
+              <h3>Questions about Commenzer?</h3>
+              <p>Contact us directly before using the service.</p>
             </div>
+            <a class="button button-primary" href="mailto:hello@commenzer.com">hello@commenzer.com</a>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="cardish">
-            <div class="step">
-              <div class="step-num">3</div>
-              <div>
-                <div class="kicker">Route & convert</div>
-                <p class="small">We send the user into the best available operator flow with measurement and optimisation.</p>
-              </div>
-            </div>
-          </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <div>© 2026 Commenzer. Conversation intelligence for senior experts.</div>
+        <div>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="mailto:hello@commenzer.com">Contact</a>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Integration tiers -->
-  <section>
-    <div class="wrap">
-      <div class="section-title">
-        <h2>Integration tiers</h2>
-        <p>Start fast, then deepen integration over time.</p>
-      </div>
-      <div class="row g-3">
-        <div class="col-md-4">
-          <div class="cardish">
-            <div class="tier-badge">Tier 1</div>
-            <div class="kicker">Deep link</div>
-            <p class="small">Fastest time-to-live. Route into operator apps/sites with tracking and event context.</p>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="cardish">
-            <div class="tier-badge">Tier 2</div>
-            <div class="kicker">Webview journey</div>
-            <p class="small">Embedded operator experience where available, improving continuity while staying pragmatic.</p>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="cardish">
-            <div class="tier-badge">Tier 3</div>
-            <div class="kicker">Full API (login/registration/bet placement)</div>
-            <p class="small">Deepest capability. Enables true server-side journeys for selected operators.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Brand safety + Reporting -->
-  <section>
-    <div class="wrap">
-      <div class="row g-3">
-        <div class="col-md-6">
-          <div class="cardish">
-            <div class="kicker">Brand safety and responsible gambling</div>
-            <p class="small">
-              Built with a partner-safe posture: clear pricing, no misleading claims, and an approach aligned to responsible gambling expectations for mainstream brands.
-            </p>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="cardish">
-            <div class="kicker">Reporting and optimisation</div>
-            <p class="small">
-              Measure funnel performance end-to-end. Optimise operator routing, placements, and UX based on conversion and retention signals.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Leadership snippet -->
-  <section>
-    <div class="wrap">
-      <div class="section-title">
-        <h2>Leadership</h2>
-        <p>Built by people who have shipped and scaled betting platforms.</p>
-      </div>
-
-      <div class="mini-team">
-        <div class="mini">
-          <div class="name">Keith O’Loughlin</div>
-          <div class="role">Chairman</div>
-          <a href="https://www.linkedin.com/in/keitholoughlin" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        </div>
-        <div class="mini">
-          <div class="name">Rochus Schreiber</div>
-          <div class="role">CEO</div>
-          <a href="https://www.linkedin.com/in/rochus-schreiber-baa84/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        </div>
-        <div class="mini">
-          <div class="name">Franz Cauchi</div>
-          <div class="role">CTO</div>
-          <a href="https://www.linkedin.com/in/franz-josef-cauchi-1055b272" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        </div>
-        <div class="mini">
-          <div class="name">Andy Hoskins</div>
-          <div class="role">COO</div>
-          <a href="https://www.linkedin.com/in/ahoskins/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        </div>
-      </div>
-
-      <div class="mt-3" style="font-size:0.95rem;">
-        Want the full team? <a href="team.html" style="color:var(--teal); text-decoration:none; font-weight:800;">View leadership team</a>.
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA band -->
-  <section>
-    <div class="wrap">
-      <div class="cta-band">
-        <h3>Book a demo</h3>
-        <p>Tell us your market and timeline. We’ll show the platform and integration options.</p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="contact.html">Book a demo</a>
-          <a class="btn btn-ghost" href="demo.html">Watch demo</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    &copy; 2026 Funteron. All rights reserved.
-    <div class="contact-info">
-      <a href="privacy.html">Privacy</a>
-      &nbsp;|&nbsp;
-      <a href="terms.html">Terms</a>
-      &nbsp;|&nbsp;
-      <a href="cookies.html">Cookies</a>
-      &nbsp;|&nbsp;
-      <a href="#" onclick="window.funteronOpenCookieSettings(); return false;">Cookie settings</a>
-      &nbsp;|&nbsp;
-      <a href="mailto:info@funteron.com">info@funteron.com</a>
-      &nbsp;|&nbsp;
-      <a href="https://www.linkedin.com/company/funteron/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-    </div>
-  </footer>
-
-  <!-- Consent + GA gating -->
-  <script>
-    (function () {
-      const CONSENT_KEY = "funteron_cookie_consent_v1"; // "accepted" | "rejected"
-
-      function hasConsent() {
-        return localStorage.getItem(CONSENT_KEY) === "accepted";
-      }
-      function hasMadeChoice() {
-        const v = localStorage.getItem(CONSENT_KEY);
-        return v === "accepted" || v === "rejected";
-      }
-
-      function loadGA() {
-        if (window.__gaLoaded) return;
-        window.__gaLoaded = true;
-
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){ dataLayer.push(arguments); }
-        window.gtag = gtag;
-
-        gtag('js', new Date());
-        gtag('config', 'G-TEJW4N23X6', { anonymize_ip: true });
-
-        const s = document.createElement("script");
-        s.async = true;
-        s.src = "https://www.googletagmanager.com/gtag/js?id=G-TEJW4N23X6";
-        document.head.appendChild(s);
-      }
-
-      function showBanner() {
-        const banner = document.getElementById("cookieBanner");
-        if (banner) banner.style.display = "block";
-      }
-      function hideBanner() {
-        const banner = document.getElementById("cookieBanner");
-        if (banner) banner.style.display = "none";
-      }
-
-      window.funteronOpenCookieSettings = function () {
-        showBanner();
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      };
-
-      document.addEventListener("DOMContentLoaded", function () {
-        if (hasConsent()) {
-          loadGA();
-        } else if (!hasMadeChoice()) {
-          showBanner();
-        }
-      });
-
-      document.addEventListener("click", function (e) {
-        if (e.target && e.target.id === "cookieAccept") {
-          localStorage.setItem(CONSENT_KEY, "accepted");
-          hideBanner();
-          loadGA();
-        }
-        if (e.target && e.target.id === "cookieReject") {
-          localStorage.setItem(CONSENT_KEY, "rejected");
-          hideBanner();
-        }
-      });
-    })();
-  </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </footer>
+  </div>
 </body>
 </html>
